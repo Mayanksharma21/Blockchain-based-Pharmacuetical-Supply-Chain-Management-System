@@ -1,0 +1,93 @@
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "batchNumber",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "uniqueID",
+				"type": "string"
+			}
+		],
+		"name": "BatchRegistered",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_drugName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_expiryDate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_mfdDate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_batchNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_uniqueID",
+				"type": "string"
+			}
+		],
+		"name": "registerBatch",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_batchNumber",
+				"type": "string"
+			}
+		],
+		"name": "getBatchDetails",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
