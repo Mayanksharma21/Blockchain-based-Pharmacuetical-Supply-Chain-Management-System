@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CreateBatch from './pages/CreateBatch';
-import Wallet from './pages/wallet';
+import Wallet from './pages/Wallet';
 import GetBatchDetails from './pages/GetBatchDetails';
 import './App.css';
 
