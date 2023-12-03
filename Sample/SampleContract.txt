@@ -1,0 +1,47 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.8.2 <0.9.0;
+
+contract BatchRegistration {
+    // Updated structure to hold additional details about a medicine batch.
+    struct Batch {
+        string drugName;      // Name of the drug.
+        string expiryDate;    // Expiry date of the drug.
+        string mfdDate;       // Manufacturing date of the drug.
+        string manufacturedBy; // Manufacturer of the drug.
+        string batchNumber;   // Unique batch number.
+        string uniqueID;      // A unique identifier for the batch.
+        uint256 timeStamp;    // Timestamp when the batch is registered.
+        bool isRegistered;    // Flag to check if the batch is registered.
+    }
+
+    // A mapping to store batches with their batch number as the key.
+    mapping(string => Batch) private batches;
+
+    // An event that is emitted when a new batch is registered.
+    event BatchRegistered(string batchNumber, string uniqueID);
+
+    // Updated function to register a new batch with additional fields.
+    function registerBatch(string calldata _drugName, string calldata _expiryDate, string calldata _mfdDate, string calldata _manufacturedBy, string calldata _batchNumber, string calldata _uniqueID) external {
+        require(!batches[_batchNumber].isRegistered, "Batch already registered.");
+
+        Batch storage newBatch = batches[_batchNumber];
+        newBatch.drugName = _drugName;
+        newBatch.expiryDate = _expiryDate;
+        newBatch.mfdDate = _mfdDate;
+        newBatch.manufacturedBy = _manufacturedBy;
+        newBatch.batchNumber = _batchNumber;
+        newBatch.uniqueID = _uniqueID;
+        newBatch.timeStamp = block.timestamp; // Set the current block timestamp.
+        newBatch.isRegistered = true;
+
+        emit BatchRegistered(_batchNumber, _uniqueID);
+    }
+
+    // Updated function to retrieve details of a batch along with new fields.
+    function getBatchDetails(string calldata _batchNumber) external view returns (string memory DrugName, string memory ExpiryDate, string memory MfdDate, string memory ManufacturedBy, string memory BatchNumber, string memory UniqueID, uint256 TimeStamp) {
+        require(batches[_batchNumber].isRegistered, "Batch not registered.");
+
+        Batch storage batch = batches[_batchNumber];
+        return (batch.drugName, batch.expiryDate, batch.mfdDate, batch.manufacturedBy, batch.batchNumber, batch.uniqueID, batch.timeStamp);
+    }
+}

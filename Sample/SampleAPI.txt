@@ -1,0 +1,24 @@
+app.get("/api/polygon/get-batch-details/:batchNum", async (req, res) => {
+  try {
+    const { batchNum } = req.params;
+    const batchDetail = await contract.methods.getBatchDetails(batchNum).call();
+    
+    // Extracting the newly added fields along with the existing ones
+    const { DrugName, ExpiryDate, MfdDate, ManufacturedBy, BatchNumber, UniqueID, TimeStamp } = batchDetail;
+    
+    // Including the new fields in the response object
+    const batchObj = {
+        DrugName, 
+        ExpiryDate, 
+        MfdDate, 
+        ManufacturedBy, // New field
+        BatchNumber, 
+        UniqueID, 
+        TimeStamp // New field
+    };
+
+    res.status(200.)(json({ status: 200, batchObj }));
+  } catch (error) {
+    res.status(500).json({ status: 500, message: "Error Occured" });
+  }
+});
